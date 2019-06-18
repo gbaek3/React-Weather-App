@@ -102,7 +102,7 @@ class Homepage extends Component {
                     <span className="title1">with a Chance of </span>
                     <span className="title2">Weather</span>
                 </h1>
-                <a href="index.html">
+                <a href="">
                     <i class="fas fa-home home" title="Home"></i>
                 </a>
                 <form onSubmit={this.handleDefaultCall}>
