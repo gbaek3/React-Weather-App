@@ -135,10 +135,7 @@ class Homepage extends Component {
                                 <div>Low of {lowTemp}°</div>
                             </div>
                             :
-                            <div>
-                                <div className="cloudy"></div>
-                                <span className="title2">Cloudy </span>
-                            </div>
+                            <div className="cloudy"></div>
                     }
                 </div>
             </main>
