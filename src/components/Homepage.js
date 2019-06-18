@@ -12,7 +12,8 @@ class Homepage extends Component {
         highTemp: '',
         lowTemp: '',
         weatherDesc: '',
-        name: ''
+        name: '',
+        lightMode: true
     }
 
     roundTemp(temp) {
@@ -93,18 +94,44 @@ class Homepage extends Component {
             })
     }
 
+    reload() {
+        window.location.reload();
+    }
+
+    darkToggle = (event) => {
+        if (this.state.lightMode === true) {
+            document.body.style.backgroundColor = "black";
+            this.setState({
+                lightMode: false
+            })
+        }
+        else {
+            document.body.style.backgroundColor = "#f2f2f2";
+            this.setState({
+                lightMode: true
+            })
+        }
+    }
+
     render() {
         const { currentTemp, highTemp, lowTemp, weatherDesc, name } = this.state;
         return (
             <main className="App">
                 <h1>
-                    <span className="title2">Cloudy </span>
-                    <span className="title1">with a Chance of </span>
-                    <span className="title2">Weather</span>
+                    <span className={this.state.lightMode ? "title2" : "title"}>Cloudy </span>
+                    <span className={this.state.lightMode ? "title1" : "title"}>with a Chance of </span>
+                    <span className={this.state.lightMode ? "title2" : "title"}>Weather</span>
                 </h1>
-                <a href="" onclick="window.location.reload()">
-                    <i class="fas fa-home home" title="Home"></i>
+                <a href="." onClick={this.reload}>
+                    <i className={this.state.lightMode ? "fas fa-home Home" : "fas fa-home HomeDark"}
+                        title="Home">
+                    </i>
                 </a>
+                <i className={this.state.lightMode ? "fas fa-adjust Switch" : "fas fa-adjust SwitchDark"}
+                    title="Toggle Dark Theme"
+                    onClick={this.darkToggle}>
+                </i>
+
                 <form onSubmit={this.handleDefaultCall}>
                     <input
                         value={this.state.inputZip}
@@ -113,8 +140,8 @@ class Homepage extends Component {
                         placeholder="Enter zip code...">
                     </input>
                     <span className="currentLoc">
-                        <i onClick={this.useCurrentLoc}
-                            className="fas fa-search-location"
+                        <i className={this.state.lightMode ? "fas fa-search-location" : "fas fa-search-location locDark"}
+                            onClick={this.useCurrentLoc}
                             title="Use Current Location">
                         </i>
                     </span>
@@ -127,7 +154,7 @@ class Homepage extends Component {
                     {
                         this.state.apiCalled
                             ?
-                            <div>
+                            <div className={this.state.lightMode ? "" : "currentForecast"}>
                                 <h1>Weather Report for {name}</h1>
                                 <div>Current temperature: {currentTemp}°</div>
                                 <div>{weatherDesc}</div>
