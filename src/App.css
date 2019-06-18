@@ -77,7 +77,7 @@ body{
 	margin-left: -60px;
 	position: absolute;
 	left: 50%;
-	top: 35%; 
+	top: 40%; 
 }
 .cloudy:after {
 	animation: cloudy_shadow 5s ease-in-out infinite;
