@@ -51,6 +51,11 @@ body{
 	color:white;
 }
 
+.futureForecastDark{
+	margin-top:25px;
+	color:white;
+}
+
 .weekDays,
 .fiveDay,
 .fiveDayDesc{

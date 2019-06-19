@@ -92,10 +92,6 @@ class Homepage extends Component {
             })
     }
 
-
-
-
-
     //use geolocation to get current coordinates
     useCurrentLoc = (event) => {
         event.preventDefault();
@@ -181,6 +177,12 @@ class Homepage extends Component {
     }
 
     render() {
+        //calculate today's date
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        today = mm + '/' + dd;
+
         const { currentTemp, highTemp, lowTemp, weatherDesc, displayName } = this.state;
         return (
             <main className="App" >
@@ -224,13 +226,14 @@ class Homepage extends Component {
                             <div>
                                 <div className={this.state.lightMode ? "currentForecast" : "resultsDark"}>
                                     <h1>Weather Report for {displayName}</h1>
+                                    <h1>{today} </h1>
                                     <div className="tempDiv">{currentTemp}°</div>
                                     <div>{weatherDesc}</div>
                                     <div>High of {highTemp}°</div>
                                     <div>Low of {lowTemp}°</div>
                                 </div>
 
-                                <div className={this.state.lightMode ? "futureForecast" : "resultsDark"}>
+                                <div className={this.state.lightMode ? "futureForecast" : "futureForecastDark"}>
                                     <h1>5 Day Forecast</h1>
                                     <div className="container">
                                         <div className="row weekDays">
