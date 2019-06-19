@@ -179,3 +179,26 @@ body{
 	}
   }
   
+@media screen and (max-width: 768px) {
+	.weekDays,
+	.fiveDay,
+	.fiveDayDesc{
+	width:100%;
+	}
+
+	.fiveDayDesc{
+		font-size:8px;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.weekDays,
+	.fiveDay,
+	.fiveDayDesc{
+		width:100%;
+	}
+
+	.fiveDayDesc{
+		font-size:10px;
+	}
+}
