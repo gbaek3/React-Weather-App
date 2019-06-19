@@ -116,20 +116,43 @@ class Homepage extends Component {
         var latCoord = sessionStorage.getItem('latitude');
         var lonCoord = sessionStorage.getItem('longitude');
 
-        $.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latCoord}&lon=${lonCoord}&units=imperial&appid=${this.state.APIkey}`)
-            .then((data) => {
-                console.log(data.data);
+        $.all([$.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latCoord}&lon=${lonCoord}&units=imperial&appid=${this.state.APIkey}`),
+        $.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${latCoord}&lon=${lonCoord}&units=imperial&appid=${this.state.APIkey}`)])
+            .then($.spread((currentData, forecastData) => {
+                console.log(currentData);
+                console.log(forecastData);
                 this.setState({
                     apiCalled: true,
                     inputError: false,
+                    displayName: currentData.data.name,
                     inputZip: '',
-                    currentTemp: this.roundTemp(data.data.main.temp),
-                    highTemp: this.roundTemp(data.data.main.temp_max),
-                    lowTemp: this.roundTemp(data.data.main.temp_min),
-                    weatherDesc: this.properCase(data.data.weather[0].description),
-                    displayName: data.data.name
+                    currentTemp: this.roundTemp(currentData.data.main.temp),
+                    highTemp: this.roundTemp(currentData.data.main.temp_max),
+                    lowTemp: this.roundTemp(currentData.data.main.temp_min),
+                    weatherDesc: this.properCase(currentData.data.weather[0].description),
+                    forecastTemp: [
+                        this.roundTemp(forecastData.data.list[1].main.temp),
+                        this.roundTemp(forecastData.data.list[9].main.temp),
+                        this.roundTemp(forecastData.data.list[17].main.temp),
+                        this.roundTemp(forecastData.data.list[25].main.temp),
+                        this.roundTemp(forecastData.data.list[33].main.temp)
+                    ],
+                    forecastDesc: [
+                        this.properCase(forecastData.data.list[1].weather[0].description),
+                        this.properCase(forecastData.data.list[9].weather[0].description),
+                        this.properCase(forecastData.data.list[17].weather[0].description),
+                        this.properCase(forecastData.data.list[25].weather[0].description),
+                        this.properCase(forecastData.data.list[33].weather[0].description)
+                    ],
+                    forecastDays: [
+                        this.getDayOfWeek((forecastData.data.list[1].dt_txt).substring(0, 10)),
+                        this.getDayOfWeek((forecastData.data.list[9].dt_txt).substring(0, 10)),
+                        this.getDayOfWeek((forecastData.data.list[17].dt_txt).substring(0, 10)),
+                        this.getDayOfWeek((forecastData.data.list[25].dt_txt).substring(0, 10)),
+                        this.getDayOfWeek((forecastData.data.list[33].dt_txt).substring(0, 10)),
+                    ],
                 })
-            }).catch(err => {
+            })).catch(err => {
                 console.log(err)
             })
     }
