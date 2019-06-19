@@ -172,7 +172,7 @@ class Homepage extends Component {
             })
         }
         else {
-            document.body.style.backgroundColor = "#f2f2f2";
+            document.body.style.backgroundColor = "#e5e5e5";
             localStorage.setItem('lightMode', true)
             this.setState({
                 lightMode: true
