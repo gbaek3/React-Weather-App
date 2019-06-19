@@ -38,6 +38,9 @@ body{
 	color:white;
 }
 
+.submit{
+	margin-top:5px;
+}
 .currentForecast{
 	color:#12535b;
 }

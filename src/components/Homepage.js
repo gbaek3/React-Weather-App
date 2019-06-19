@@ -213,7 +213,11 @@ class Homepage extends Component {
                             onClick={this.useCurrentLoc}
                             title="Use Current Location">
                         </i>
-                    </span>
+                    </span><br></br>
+                    <button className="btn btn-info btn-sm submit"
+                        onClick={this.handleDefaultCall}>
+                        Submit
+                    </button>
                     <div className={`inputError ${!this.state.inputError && "errToggle"}`}>
                         Error - please try another zip code
                     </div>
