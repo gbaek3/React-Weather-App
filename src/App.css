@@ -197,6 +197,10 @@ body{
 	.fiveDayDesc{
 		font-size:8px;
 	}
+	.cloudy {
+		top: 50%; 
+		z-index: -1;
+	}
 }
 
 @media screen and (max-width: 992px) {
@@ -208,5 +212,10 @@ body{
 
 	.fiveDayDesc{
 		font-size:10px;
+	}
+
+	.cloudy {
+		top: 50%; 
+		z-index: -1;
 	}
 }
